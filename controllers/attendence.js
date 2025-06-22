@@ -1,6 +1,14 @@
 const path = require('path');
 const fs = require('fs');
 const XLSX = require('xlsx');
+const sqlite3 = require('sqlite3').verbose();
+
+let db = new sqlite3.Database('./attendance.sqlite', (err) => {
+    if (err) {
+        return console.error(err.message);
+    }
+    console.log('Connected to database.');
+});
 
 exports.getForm  = (req, res) => {
     res.sendFile(path.join(__dirname, "../html/index.html"));
@@ -11,7 +19,12 @@ exports.postAttendence = (req, res) => {
     let { name, rollNo, branch, year } = req.body;
 
     // Define the path to the spreadsheet
-    const filePath = path.join(__dirname, '../data.xlsx');
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const mt = String(today.getMonth() + 1).padStart(2, '0');
+    const yr = today.getFullYear();
+    const filename = `../${day}_${mt}_${yr}.xlsx`;
+    const filePath = path.join(__dirname, filename);
 
     let workbook;
     let worksheet;
@@ -44,7 +57,7 @@ exports.postAttendence = (req, res) => {
 
     if (duplicate) {
         // If duplicate found, send a response indicating duplication
-        res.status(400).send("Duplicate entry found for roll number " + rollNo);
+        res.status(400).send("Today's attendance for roll number " + rollNo + " was marked already");
     } else {
         // Append the new data to the sheet
         XLSX.utils.sheet_add_aoa(worksheet, [[name, rollNo, branch, year]], { origin: -1 });
@@ -57,7 +70,13 @@ exports.postAttendence = (req, res) => {
         // Write the updated workbook back to the file
         XLSX.writeFile(workbook, filePath);
 
-        // Send a success response
-        res.sendFile(path.join(__dirname, "../html/success.html"));
+        db.run(
+            `INSERT INTO attendance(name, roll, branch, year) VALUES(?, ?, ?, ?)`, [name, rollNo, branch, year],
+            function(err) {
+                if (err) return console.log(err.message);
+                // Send a success response
+                res.sendFile(path.join(__dirname, "../html/success.html"));
+            }
+        );
     }
 };
