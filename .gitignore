@@ -4,3 +4,4 @@ test.js
 *xlsx
 package-lock.json
 attendance.sqlite
+.idea
