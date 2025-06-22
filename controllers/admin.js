@@ -1,7 +1,7 @@
 const path = require('path');
 
-const ADMIN_EMAIL = 'admin@example.com';
-const ADMIN_PASSWORD = 'letmein123';
+const ADMIN = 'admin';
+const ADMIN_PASSWORD = 'admin';
 
 let isAdminAllowed = false;
 let accessEndTime = null;
@@ -13,7 +13,7 @@ exports.adminForm = (req, res) => {
 exports.admin = (req, res) => {
   const { username, password, access, time } = req.body;
 
-  if (username === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+  if (username === ADMIN && password === ADMIN_PASSWORD) {
     if (access === 'true') {
       const minutes = time ? parseInt(time) : 30;
       isAdminAllowed = true;
