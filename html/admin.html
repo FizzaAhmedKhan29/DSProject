@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="success.png" type="image/png">
+    <title>Request Data</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playwrite+FR+Moderne:wght@100..400&display=swap');
+
+        body {
+            font-family: "Playwrite FR Moderne", cursive;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        select,
+        input,
+        button {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input::placeholder {
+            color: #7c7c7c;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: no-repeat right 10px center;
+            background-size: 20px;
+            padding-right: 40px;
+        }
+
+        option:disabled {
+            color: rgb(254, 97, 97);
+        }
+
+        button {
+            font-family: "Playwrite FR Moderne", cursive;
+            font-weight: 700;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+
+        sup {
+            color: red;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                padding: 10px;
+            }
+
+            input[type="submit"] {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Admin Form</h1>
+    <form action="/admin" method="POST">
+
+        <label for="username">Username <sup>*</sup></label>
+        <input type="text" name="username" id="username" placeholder="Username or email" required autofocus>
+
+        <label for="password">Password <sup>*</sup></label>
+        <input type="password" name="password" id="password" placeholder="Password" required>
+
+        <label for="access">Set Access <sup>*</sup></label>
+        <select name="access" id="access" required>
+            <option value="">--Select Access--</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+        </select>
+
+        <label for="time">Time Allowed</label>
+        <input type="text" name="time" id="time" placeholder="10, 20 (minutes)"     >
+
+        <button type="submit">SET ACCESS</button>
+    </form>
+</body>
+
+</html>

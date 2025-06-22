@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="success.png" type="image/png">
+    <title>Request Data</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playwrite+FR+Moderne:wght@100..400&display=swap');
+
+        body {
+            font-family: "Playwrite FR Moderne", cursive;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        select,
+        input[type="number"],
+        button {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        input::placeholder {
+            color: #202020;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: no-repeat right 10px center;
+            background-size: 20px;
+            padding-right: 40px;
+        }
+
+        option:disabled {
+            color: rgb(254, 97, 97);
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        button {
+            font-family: "Playwrite FR Moderne", cursive;
+            font-weight: 700;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+
+        sup {
+            color: red;
+        }
+
+        @media (max-width: 600px) {
+            form {
+                padding: 10px;
+            }
+
+            input[type="submit"] {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Request Data</h1>
+    <form action="/send-data" method="POST">
+
+        <label for="branch">Select Branch <sup>*</sup></label>
+        <select name="branch" id="branch" required>
+            <option value="">--Select Branch--</option>
+            <option value="CE">CE</option>
+            <option value="CSE">CSE</option>
+            <option value="AI-ML">CSE (AI/ML)</option>
+            <option value="ECE">ECE</option>
+            <option value="EE">EE</option>
+            <option value="ME">ME</option>
+        </select>
+
+        <label for="year">Select Year <sup>*</sup></label>
+        <select name="year" id="year" required>
+            <option value="">--Select Year--</option>
+            <option value="1">1<sup>st</sup></option>
+            <option value="2">2<sup>nd</sup></option>
+            <option value="3">3<sup>rd</sup></option>
+            <option value="4">4<sup>th</sup></option>
+        </select>
+
+        <label for="contact">Contact <sup>*</sup></label>
+        <input type="number" id="contact" name="phoneNumber" placeholder="999-999-9999" required>
+
+        <button type="submit">GET DATA</button>
+    </form>
+</body>
+
+</html>
